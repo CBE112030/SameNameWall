@@ -1,0 +1,471 @@
+body {
+  margin: 0;
+  font-family: Arial, "Noto Sans TC", sans-serif;
+  background: #fff7ed;
+}
+
+/* ===== 主頁背景 ===== */
+.app,
+.wall-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #fff7ed, #fef3c7, #fce7f3);
+}
+
+/* ===== 置中容器 ===== */
+.hero {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-text {
+  max-width: 520px;
+  margin: 0 auto 24px;
+  line-height: 1.8;
+}
+
+.home-hot-box {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #fed7aa;
+  border-radius: 20px;
+  padding: 18px;
+  margin: 0 auto 24px;
+  max-width: 520px;
+  box-shadow: 0 8px 18px rgba(154, 52, 18, 0.1);
+}
+
+.home-hot-box h2 {
+  color: #9a3412;
+  margin-top: 0;
+}
+
+.create-btn {
+  width: 100%;
+  max-width: 560px;
+  display: block;
+  margin: 0 auto 20px;
+  background: #fb923c;
+}
+
+.wall-header,
+.post-form,
+.message,
+.post-card {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ===== 標題 ===== */
+.hero {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.hero h1,
+.wall-header h1 {
+  color: #9a3412;
+  font-size: 44px;
+}
+
+.hero p,
+.wall-header p {
+  color: #6b7280;
+}
+
+/* ===== 卡片 ===== */
+.login-card,
+.post-form,
+.post-card,
+.message {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #fed7aa;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(154, 52, 18, 0.12);
+}
+
+/* ===== login ===== */
+.login-card {
+  margin-top: 24px;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 10px;
+  color: #92400e;
+  font-weight: bold;
+}
+
+/* ===== input ===== */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #fdba74;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* ===== button ===== */
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  background: #fb923c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f97316;
+}
+
+.back-btn {
+  background: #fbbf24;
+  margin-bottom: 12px;
+}
+
+/* ===== post ===== */
+.post-form {
+  margin-bottom: 24px;
+}
+
+.post-form h2 {
+  margin-top: 0;
+  color: #92400e;
+}
+
+.post-form button,
+.login-card button {
+  width: 100%;
+}
+
+/* ===== message ===== */
+.message {
+  text-align: center;
+  color: #92400e;
+  margin-bottom: 20px;
+}
+
+.message.error {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+/* ===== post list ===== */
+.post-list {
+  max-width: 560px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.post-card h3 {
+  margin-top: 0;
+  color: #7c2d12;
+}
+
+.post-card p {
+  margin: 8px 0;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.8);
+  color: #7c2d12;
+
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+  padding: 0;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  background: #d1d5db;
+}
+
+.dot.active {
+  background: #fb923c;
+}
+
+/* ===== upload 區 ===== */
+.upload-box {
+  padding: 12px;
+  border: 2px dashed #fdba74;
+  border-radius: 12px;
+  background: #fff;
+  margin-bottom: 15px;
+}
+
+.upload-count {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.preview-item {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: 0.2s;
+
+  transform-origin: center;
+}
+
+.preview-item img:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* ===== tag ===== */
+.tag {
+  display: inline-block;
+  background: #ffedd5;
+  color: #c2410c;
+  padding: 6px 10px;
+  border-radius: 999px;
+  margin-top: 8px;
+}
+
+/* ===== time ===== */
+.time {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ===== delete ===== */
+.delete-btn {
+  background: #ef4444;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ===== stats ===== */
+.stats-box,
+.hot-box {
+  max-width: 560px;
+  margin: 0 auto 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #fed7aa;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(154, 52, 18, 0.1);
+}
+
+.stats-box p,
+.hot-box p {
+  margin: 6px 0;
+}
+
+.hot-box h2 {
+  margin-top: 0;
+  color: #9a3412;
+}
+
+/* ===== RWD ===== */
+@media (max-width: 600px) {
+  .app,
+  .wall-page {
+    padding: 16px;
+  }
+
+  .hero {
+    padding-top: 40px;
+  }
+
+  .hero h1,
+  .wall-header h1 {
+    font-size: 32px;
+  }
+
+  .login-card,
+  .post-form,
+  .post-card,
+  .message {
+    padding: 18px;
+  }
+
+  button,
+  input {
+    font-size: 15px;
+  }
+
+  .image-slider img {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.upload-tip {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+.preview-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 10px 10px 10px 5px;
+}
+
+/* 圖片 */
+.preview-item {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  position: relative;   /* 🔥 避免 scale 被裁 */
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.preview-item img:hover {
+  border: 2px solid #fb923c;
+  transform: scale(1.05);
+}
+
+/* ➕ 按鈕（你要的版本） */
+.add-box {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.add-btn {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+
+  background: transparent;          /* 🔥 重點：透明 */
+  border: 2px dashed #fb923c;      /* 橘色虛線框 */
+
+  color: #fb923c;                  /* + 是橘色 */
+  font-size: 28px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s;
+  transform-origin: center;
+}
+
+.add-btn:hover {
+  background: rgba(251, 146, 60, 0.08);
+  transform: scale(1.05);
+}
+
+.crop-modal{
+  position:relative;
+
+  width:100%;
+  height:300px;
+
+  margin-top:20px;
+
+  background:#fff;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  border:2px dashed #fdba74;
+  }
+
+.crop-modal button{
+  position:absolute;
+
+  bottom:10px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:auto;
+
+  padding:10px 20px;
+
+  z-index:10;
+}
