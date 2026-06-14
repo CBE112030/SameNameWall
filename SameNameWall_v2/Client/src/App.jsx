@@ -3,7 +3,7 @@ import Cropper from "react-easy-crop";
 import getCroppedImg from "./cropImage";
 import "./App.css";
 
-const API_URL = "http://localhost:3000/api/posts";
+const API_URL = "https://samenamewall.onrender.com/api/posts";
 
 function ImageCarousel({ images, activity }) {
   const [current, setCurrent] = useState(0);
@@ -103,7 +103,7 @@ function App() {
 
   async function fetchStats(name) {
     try {
-      const response = await fetch(`http://localhost:3000/api/stats/${name}`);
+      const response = await fetch(`https://samenamewall.onrender.com/api/stats/${name}`);
       const data = await response.json();
       setStats(data);
     } catch (err) {
@@ -113,7 +113,7 @@ function App() {
 
   async function fetchHotNames() {
     try {
-      const response = await fetch("http://localhost:3000/api/hot-names");
+      const response = await fetch("https://samenamewall.onrender.com/api/hot-names");
       const data = await response.json();
       setHotNames(data);
     } catch (err) {
@@ -151,7 +151,7 @@ function App() {
         const formData = new FormData();
         formData.append("image", file);
 
-        const uploadRes = await fetch("http://localhost:3000/api/upload", {
+        const uploadRes = await fetch("https://samenamewall.onrender.com/api/upload", {
           method: "POST",
           body: formData
         });
