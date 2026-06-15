@@ -318,39 +318,17 @@ function App() {
                   <input
                     type="file"
                     accept="image/*"
-                    multiple
                     hidden
-                   onChange={(e) => {
-                    const files =
-                      Array.from(
-                        e.target.files || []
-                      );
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
 
-                    if (
-                      imageFiles.length +
-                      files.length >
-                      5
-                    ) {
-                      alert(
-                        "最多只能上傳 5 張"
-                      );
+                      // 👉 開始裁切這一張
+                      setCropImage(file);
 
+                      // 👉 清空 input，避免同一張不能重選
                       e.target.value = "";
-
-                      return;
-                    }
-
-                    if (
-                      files.length > 0
-                    ) {
-                      setCropImage(
-                        files[0]
-                      );
-                    }
-
-                    // 🔥 重點
-                    e.target.value = "";
-                  }}
+                    }}
                   />
 
                   <div className="add-btn">+</div>
