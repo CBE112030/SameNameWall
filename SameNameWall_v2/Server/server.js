@@ -17,14 +17,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/samenamewall")
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("MongoDB Connected!");
   })
@@ -143,7 +143,8 @@ app.delete("/api/posts/:id", async (req, res) => {
 
   app.post("/api/upload", upload.single("image"), (req, res) => {
   try {
-    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+    const imageUrl =
+      `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
     res.json({ imageUrl });
   } catch (error) {
