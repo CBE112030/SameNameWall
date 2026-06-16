@@ -158,8 +158,6 @@ function App() {
       return;
     }
 
-    setLoading(true);
-
     let uploadedImages = [];
 
     if (imageFiles.length > 0) {
@@ -206,8 +204,6 @@ function App() {
       setPage("wall");
     } catch (err) {
       setError("新增失敗，請稍後再試。");
-    } finally {
-      setLoading(false);
     }
   }
 
