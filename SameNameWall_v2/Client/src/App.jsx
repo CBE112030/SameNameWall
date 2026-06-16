@@ -5,6 +5,20 @@ import "./App.css";
 
 const API_URL = "https://samenamewall.onrender.com/api/posts";
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = reject;
+
+    reader.readAsDataURL(file);
+  });
+}
+
 function ImageCarousel({ images, activity }) {
   const [current, setCurrent] = useState(0);
 
@@ -148,16 +162,10 @@ function App() {
 
     if (imageFiles.length > 0) {
       for (let file of imageFiles) {
-        const formData = new FormData();
-        formData.append("image", file);
+        const base64 =
+          await fileToBase64(file);
 
-        const uploadRes = await fetch("https://samenamewall.onrender.com/api/upload", {
-          method: "POST",
-          body: formData
-        });
-
-        const uploadData = await uploadRes.json();
-        uploadedImages.push(uploadData.imageUrl);
+        uploadedImages.push(base64);
       }
     }
 
