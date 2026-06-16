@@ -158,6 +158,8 @@ function App() {
       return;
     }
 
+    setLoading(true);
+
     let uploadedImages = [];
 
     if (imageFiles.length > 0) {
@@ -204,6 +206,8 @@ function App() {
       setPage("wall");
     } catch (err) {
       setError("新增失敗，請稍後再試。");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -301,7 +305,7 @@ function App() {
           />
 
           <div className="upload-box">
-            <p className="upload-count">已選 {imageFiles.length} / 5 張</p>
+            <p className="upload-count">已選 {imageFiles.length} / 3 張</p>
 
             <div className="preview-grid">
               {imageFiles.map((file, index) => (
@@ -321,7 +325,7 @@ function App() {
                 </div>
               ))}
 
-              {imageFiles.length < 5 && (
+              {imageFiles.length < 3 && (
                 <label className="add-box">
                   <input
                     type="file"
