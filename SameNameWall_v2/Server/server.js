@@ -20,20 +20,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-
 app.use(
   express.json({
     limit: "50mb"
   })
 );
-
-app.use(
-  express.urlencoded({
-    extended: true,
-    limit: "50mb"
-  })
-);
-
 app.use("/uploads", express.static("uploads"));
 
 mongoose
@@ -56,7 +47,7 @@ app.get("/api/posts", async (req, res) => {
 
     const filter = username ? { username: username } : {};
 
-    const posts = await Post .find(filter) .select("+images") .sort({ createdAt:-1 });
+    const posts = await Post.find(filter).sort({ createdAt: -1 });
 
     res.json(posts);
   } catch (error) {
