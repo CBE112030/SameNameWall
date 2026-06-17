@@ -60,69 +60,91 @@ app.get("/api/stats/:username", async (req, res) => {
   try {
     const username = req.params.username;
 
-    const totalCount = await Post.countDocuments({ username });
+    const totalCount =
+      await Post.countDocuments({ username });
 
+    // 台灣今天凌晨（轉回 UTC）
     const now = new Date();
 
-    const taiwanNow = new Date(
-      now.toLocaleString("en-US", { timeZone: "Asia/Taipei" })
+    const startOfToday =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+      );
+
+    startOfToday.setHours(
+      startOfToday.getHours() - 8
     );
 
-    taiwanNow.setHours(0, 0, 0, 0);
-
-    const startOfToday = taiwanNow;
-
-    const todayCount = await Post.countDocuments({
-      username,
-      createdAt: { $gte: startOfToday }
-    });
+    const todayCount =
+      await Post.countDocuments({
+        username,
+        createdAt: {
+          $gte: startOfToday
+        }
+      });
 
     res.json({
       username,
       totalCount,
       todayCount
     });
+
   } catch (error) {
-    res.status(500).json({ message: "取得統計資料失敗" });
+    res
+      .status(500)
+      .json({
+        message:
+          "取得統計資料失敗"
+      });
   }
 });
 
 // GET：取得今日熱門名字排行榜
 app.get("/api/hot-names", async (req, res) => {
   try {
+
     const now = new Date();
 
-    // 轉成台灣時間
-    const taiwanNow = new Date(
-      now.toLocaleString("en-US", { timeZone: "Asia/Taipei" })
+    const startOfToday =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+      );
+
+    startOfToday.setHours(
+      startOfToday.getHours() - 8
     );
 
-    // 設定台灣 00:00
-    taiwanNow.setHours(0, 0, 0, 0);
-
-    const startOfToday = taiwanNow;
-
-    const hotNames = await Post.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: startOfToday }
+    const hotNames =
+      await Post.aggregate([
+        {
+          $match: {
+            createdAt: {
+              $gte:
+                startOfToday
+            }
+          }
+        },
+        {
+          $group: {
+            _id: "$username",
+            count: {
+              $sum: 1
+            }
+          }
+        },
+        {
+          $sort: {
+            count: -1
+          }
+        },
+        {
+          $limit: 5
         }
-      },
-      {
-        $group: {
-          _id: "$username",
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $sort: {
-          count: -1
-        }
-      },
-      {
-        $limit: 5
-      }
-    ]);
+      ]);
 
     res.json(hotNames);
   } catch (error) {
