@@ -61,27 +61,41 @@ app.get("/api/stats/:username", async (req, res) => {
     const username = req.params.username;
 
     const totalCount =
-      await Post.countDocuments({ username });
+      await Post.countDocuments({
+        username
+      });
 
-    // 台灣今天凌晨（轉回 UTC）
+    // 台灣今天凌晨 → UTC
     const now = new Date();
+
+    const taiwan = new Date(
+      now.toLocaleString(
+        "en-US",
+        {
+          timeZone:
+            "Asia/Taipei"
+        }
+      )
+    );
 
     const startOfToday =
       new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate()
+        Date.UTC(
+          taiwan.getFullYear(),
+          taiwan.getMonth(),
+          taiwan.getDate(),
+          -8,
+          0,
+          0
+        )
       );
-
-    startOfToday.setHours(
-      startOfToday.getHours() - 8
-    );
 
     const todayCount =
       await Post.countDocuments({
         username,
         createdAt: {
-          $gte: startOfToday
+          $gte:
+            startOfToday
         }
       });
 
@@ -91,7 +105,7 @@ app.get("/api/stats/:username", async (req, res) => {
       todayCount
     });
 
-  } catch (error) {
+  } catch {
     res
       .status(500)
       .json({
@@ -107,16 +121,28 @@ app.get("/api/hot-names", async (req, res) => {
 
     const now = new Date();
 
-    const startOfToday =
+    const taiwan =
       new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate()
+        now.toLocaleString(
+          "en-US",
+          {
+            timeZone:
+              "Asia/Taipei"
+          }
+        )
       );
 
-    startOfToday.setHours(
-      startOfToday.getHours() - 8
-    );
+    const startOfToday =
+      new Date(
+        Date.UTC(
+          taiwan.getFullYear(),
+          taiwan.getMonth(),
+          taiwan.getDate(),
+          -8,
+          0,
+          0
+        )
+      );
 
     const hotNames =
       await Post.aggregate([
@@ -130,7 +156,8 @@ app.get("/api/hot-names", async (req, res) => {
         },
         {
           $group: {
-            _id: "$username",
+            _id:
+              "$username",
             count: {
               $sum: 1
             }
@@ -147,9 +174,8 @@ app.get("/api/hot-names", async (req, res) => {
       ]);
 
     res.json(hotNames);
-  } catch (error) {
-    res.status(500).json({ message: "取得熱門名字失敗" });
-  }
+
+  } catch {res.status(500).json({message:"取得熱門名字失敗"});}
 });
 
 // POST：新增貼文
