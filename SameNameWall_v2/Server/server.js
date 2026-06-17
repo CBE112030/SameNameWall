@@ -62,8 +62,15 @@ app.get("/api/stats/:username", async (req, res) => {
 
     const totalCount = await Post.countDocuments({ username });
 
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
+    const now = new Date();
+
+    const taiwanNow = new Date(
+      now.toLocaleString("en-US", { timeZone: "Asia/Taipei" })
+    );
+
+    taiwanNow.setHours(0, 0, 0, 0);
+
+    const startOfToday = taiwanNow;
 
     const todayCount = await Post.countDocuments({
       username,
@@ -83,8 +90,17 @@ app.get("/api/stats/:username", async (req, res) => {
 // GET：取得今日熱門名字排行榜
 app.get("/api/hot-names", async (req, res) => {
   try {
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
+    const now = new Date();
+
+    // 轉成台灣時間
+    const taiwanNow = new Date(
+      now.toLocaleString("en-US", { timeZone: "Asia/Taipei" })
+    );
+
+    // 設定台灣 00:00
+    taiwanNow.setHours(0, 0, 0, 0);
+
+    const startOfToday = taiwanNow;
 
     const hotNames = await Post.aggregate([
       {
